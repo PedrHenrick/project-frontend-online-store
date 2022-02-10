@@ -1,13 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { BsCartPlus } from 'react-icons/bs';
+import Button from './components/Button';
 
 export default class Home extends React.Component {
   state = {
     redirect: false,
   };
 
-handleClick = async () => {
+handleClick = () => {
   this.setState({ redirect: true });
 };
 
@@ -24,13 +24,7 @@ render() {
       <h3 data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </h3>
-      <button
-        data-testid="shopping-cart-button"
-        type="submit"
-        onClick={ this.handleClick }
-      >
-        <BsCartPlus size={ 30 } />
-      </button>
+      <Button buttonClick={ this.handleClick } />
     </div>
   );
 }
