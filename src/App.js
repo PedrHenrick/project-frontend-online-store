@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
 import Home from './pages/Home';
-import Carrinho from './pages/Carrinho ';
+import Carrinho from './pages/Carrinho';
+import './styles/Home.css';
 
 class App extends React.Component {
   render() {
