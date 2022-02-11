@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { FcUndo } from 'react-icons/fc';
-import Button from './components/Button';
+import ButtonBack from '../components/ButtonBack';
 
 class Carrinho extends React.Component {
   state = {
@@ -25,8 +24,7 @@ class Carrinho extends React.Component {
             Seu carrinho está vazio.
           </h3>
         </div>
-        <FcUndo size={ 40 } />
-        <Button buttonClick={ this.handleClick } />
+        <ButtonBack buttonClick={ this.handleClick } />
       </div>
     );
   }

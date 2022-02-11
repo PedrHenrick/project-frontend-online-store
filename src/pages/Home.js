@@ -1,14 +1,15 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import Button from './components/Button';
+
+import { Link } from 'react-router-dom';
+import ButtonCar from '../components/ButtonCar';
 import { getCategories, getProductsFromQuery } from '../services/api';
-import Categories from './components/Categories';
+import Categories from '../components/Categories';
 
 export default class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      redirect: false,
+
       categoriesProducts: [],
       searchValue: '',
       resultProducts: [],
@@ -21,10 +22,6 @@ export default class Home extends React.Component {
     const categoriesProducts = await getCategories();
     this.setState({ categoriesProducts });
   }
-
-  handleClick = () => {
-    this.setState({ redirect: true });
-  };
 
   handleClickSearch = async () => {
     const { searchValue } = this.state;
@@ -49,24 +46,29 @@ export default class Home extends React.Component {
     const resulFail = <h3>Nenhum produto foi encontrado</h3>;
     return (
       <div className="containerItems">
-        { !valueSearch
+        {!valueSearch
           ? resulFail
           : resultProducts.map(({ id, thumbnail, price, title }) => (
-            <section data-testid="product" key={ id } className="items">
-              <img src={ thumbnail } alt={ title } />
-              <h3>{ title }</h3>
-              <p>{ price }</p>
-            </section>
+            <Link
+              key={ title }
+              data-testid="product-detail-link"
+              to={ `/productsDetails/${id}` }
+            >
+              <section data-testid="product" key={ id } className="items">
+                <img src={ thumbnail } alt={ title } />
+                <h3>{title}</h3>
+                <p>{price}</p>
+                <h4> Ver Detalhes</h4>
+              </section>
+            </Link>
           ))}
       </div>
     );
   }
 
   render() {
-    const { redirect, categoriesProducts, searchValue, searchInfo } = this.state;
-    if (redirect) {
-      return <Redirect to="/carrinho" />;
-    }
+    const { categoriesProducts, searchValue, searchInfo } = this.state;
+
     return (
       <div className="homeContainer">
 
@@ -97,8 +99,7 @@ export default class Home extends React.Component {
           >
             Pesquisar
           </button>
-
-          <Button buttonClick={ this.handleClick } />
+          <ButtonCar />
           { searchInfo ? this.renderItens() : null }
         </section>
       </div>
