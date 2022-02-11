@@ -14,6 +14,7 @@ class Categories extends Component {
               <input
                 id={ id }
                 type="radio"
+                name="categories"
                 onClick={ getItemsByCategory }
               />
               { name }

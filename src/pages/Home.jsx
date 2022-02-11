@@ -51,11 +51,11 @@ export default class Home extends React.Component {
       <div className="containerItems">
         { !valueSearch
           ? resulFail
-          : resultProducts.map(({ id, thumbnail, price, title }) => (
-            <section data-testid="product" key={ id } className="items">
-              <img src={ thumbnail } alt={ title } />
-              <h3>{ title }</h3>
-              <p>{ price }</p>
+          : resultProducts.map((product) => (
+            <section data-testid="product" key={ product.id } className="items">
+              <img src={ product.thumbnail } alt={ product.title } />
+              <h3>{ product.title }</h3>
+              <p>{ product.price }</p>
             </section>
           ))}
       </div>
@@ -63,11 +63,12 @@ export default class Home extends React.Component {
   }
 
   getItemsByCategory = async ({ target }) => {
-    const categoryName = target.innerHTML;
     const { categoriesProducts } = this.state;
-    const { id } = categoriesProducts.find((item) => item.name === categoryName);
-    const { resPromise } = await getProductsFromCategory(id);
-    this.setState({ resultProducts: resPromise });
+    const { id } = categoriesProducts.find((item) => item.id === target.id);
+    const { results } = await getProductsFromCategory(id);
+    this.setState({ resultProducts: results, searchInfo: true });
+    if (results.length === 0) this.setState({ valueSearch: false });
+    else this.setState({ valueSearch: true });
     this.renderItens();
   }
 
