@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Button from './components/Button';
-import { getCategories, getProductsFromQuery } from '../services/api';
+import { getCategories,
+  getProductsFromQuery, getProductsFromCategory } from '../services/api';
 import Categories from './components/Categories';
 
 export default class Home extends React.Component {
@@ -51,15 +52,25 @@ export default class Home extends React.Component {
       <div className="containerItems">
         { !valueSearch
           ? resulFail
-          : resultProducts.map(({ id, thumbnail, price, title }) => (
-            <section data-testid="product" key={ id } className="items">
-              <img src={ thumbnail } alt={ title } />
-              <h3>{ title }</h3>
-              <p>{ price }</p>
+          : resultProducts.map((product) => (
+            <section data-testid="product" key={ product.id } className="items">
+              <img src={ product.thumbnail } alt={ product.title } />
+              <h3>{ product.title }</h3>
+              <p>{ product.price }</p>
             </section>
           ))}
       </div>
     );
+  }
+
+  getItemsByCategory = async ({ target }) => {
+    const { categoriesProducts } = this.state;
+    const { id } = categoriesProducts.find((item) => item.id === target.id);
+    const { results } = await getProductsFromCategory(id);
+    this.setState({ resultProducts: results, searchInfo: true });
+    if (results.length === 0) this.setState({ valueSearch: false });
+    else this.setState({ valueSearch: true });
+    this.renderItens();
   }
 
   render() {
@@ -71,7 +82,10 @@ export default class Home extends React.Component {
       <div className="homeContainer">
 
         <section className="categories">
-          <Categories categorie={ categoriesProducts } />
+          <Categories
+            categorie={ categoriesProducts }
+            getItemsByCategory={ this.getItemsByCategory }
+          />
         </section>
 
         <section className="navegationPage">
