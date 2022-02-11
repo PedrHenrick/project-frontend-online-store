@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Categories extends Component {
   render() {
-    const { categorie } = this.props;
+    const { categorie, getItemsByCategory } = this.props;
 
     return (
       <section>
@@ -14,11 +14,12 @@ class Categories extends Component {
               <input
                 id={ id }
                 type="radio"
+                name="categories"
+                onClick={ getItemsByCategory }
               />
               { name }
             </label>
           </section>
-
         ))}
       </section>
     );
@@ -32,6 +33,7 @@ Categories.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
+  getItemsByCategory: PropTypes.func.isRequired,
 };
 
 export default Categories;

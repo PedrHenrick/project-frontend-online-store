@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import ButtonCar from '../components/ButtonCar';
-import { getCategories, getProductsFromQuery } from '../services/api';
+import { getCategories,
+  getProductsFromQuery, getProductsFromCategory } from '../services/api';
 import Categories from '../components/Categories';
+import ButtonCar from './components/ButtonCar';
 
 export default class Home extends React.Component {
   constructor() {
@@ -66,14 +67,26 @@ export default class Home extends React.Component {
     );
   }
 
+  getItemsByCategory = async ({ target }) => {
+    const { categoriesProducts } = this.state;
+    const { id } = categoriesProducts.find((item) => item.id === target.id);
+    const { results } = await getProductsFromCategory(id);
+    this.setState({ resultProducts: results, searchInfo: true });
+    if (results.length === 0) this.setState({ valueSearch: false });
+    else this.setState({ valueSearch: true });
+    this.renderItens();
+  }
+
   render() {
     const { categoriesProducts, searchValue, searchInfo } = this.state;
-
     return (
       <div className="homeContainer">
 
         <section className="categories">
-          <Categories categorie={ categoriesProducts } />
+          <Categories
+            categorie={ categoriesProducts }
+            getItemsByCategory={ this.getItemsByCategory }
+          />
         </section>
 
         <section className="navegationPage">

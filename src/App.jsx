@@ -17,7 +17,6 @@ class App extends React.Component {
           />
           <Route exact patch="/carrinho" component={ Carrinho } />
         </Switch>
-
       </BrowserRouter>
     );
   }
