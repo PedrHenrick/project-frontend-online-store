@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Button from './components/Button';
-import { getCategories, getProductsFromQuery, getProductsFromCategory } from '../services/api';
+import { getCategories,
+  getProductsFromQuery, getProductsFromCategory } from '../services/api';
 import Categories from './components/Categories';
 
 export default class Home extends React.Component {
@@ -81,7 +82,10 @@ export default class Home extends React.Component {
       <div className="homeContainer">
 
         <section className="categories">
-          <Categories categorie={ categoriesProducts } getItemsByCategory={ this.getItemsByCategory } />
+          <Categories
+            categorie={ categoriesProducts }
+            getItemsByCategory={ this.getItemsByCategory }
+          />
         </section>
 
         <section className="navegationPage">
