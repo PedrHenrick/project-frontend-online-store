@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Button from './components/Button';
-import { getCategories, getProductsFromQuery } from '../services/api';
+import { getCategories, getProductsFromQuery, getProductsFromCategory } from '../services/api';
 import Categories from './components/Categories';
 
 export default class Home extends React.Component {
@@ -62,6 +62,15 @@ export default class Home extends React.Component {
     );
   }
 
+  getItemsByCategory = async ({ target }) => {
+    const categoryName = target.innerHTML;
+    const { categoriesProducts } = this.state;
+    const { id } = categoriesProducts.find((item) => item.name === categoryName);
+    const { resPromise } = await getProductsFromCategory(id);
+    this.setState({ resultProducts: resPromise });
+    this.renderItens();
+  }
+
   render() {
     const { redirect, categoriesProducts, searchValue, searchInfo } = this.state;
     if (redirect) {
@@ -71,7 +80,7 @@ export default class Home extends React.Component {
       <div className="homeContainer">
 
         <section className="categories">
-          <Categories categorie={ categoriesProducts } />
+          <Categories categorie={ categoriesProducts } getItemsByCategory={ this.getItemsByCategory } />
         </section>
 
         <section className="navegationPage">
