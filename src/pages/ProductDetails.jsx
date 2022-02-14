@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getProdutsDetailsID } from '../services/api';
 import ButtonCar from '../components/ButtonCar';
+import ButtonAddCart from '../components/ButtonAddCart';
 
 class ProductDetails extends React.Component {
   state = {
@@ -26,6 +27,7 @@ class ProductDetails extends React.Component {
     const {
       products: { title, thumbnail, attributes, price },
     } = this.state;
+    const { products } = this.state;
     return (
       <div>
         <h3>Detalhe do produto</h3>
@@ -51,6 +53,10 @@ class ProductDetails extends React.Component {
               </li>
             ))}
         </ul>
+        <ButtonAddCart
+          data-testid="product-add-to-cart"
+          product={ products }
+        />
         <ButtonCar />
       </div>
     );
