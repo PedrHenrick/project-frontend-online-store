@@ -24,6 +24,7 @@ export default class Home extends React.Component {
 
     const QtdInStorage = localStorage.getItem('cartItems');
     const QtdInCart = JSON.parse(QtdInStorage);
+    console.log(QtdInCart);
 
     this.initialize(QtdInCart);
 
@@ -65,30 +66,36 @@ export default class Home extends React.Component {
       <div className="containerItems">
         {!valueSearch
           ? resulFail
-          : resultProducts.map((product) => (
-            <section data-testid="product" key={ product.id } className="items">
-              <img src={ product.thumbnail } alt={ product.title } />
-              <h3>{ product.title }</h3>
-              <h4>
-                {product.price
+          : resultProducts.map((product) =>
+          // if (product.quantity) {
+          //   product.quantity += 1;
+          // } else {
+          //   product.quantity = 1;
+          // }
+
+            (
+              <section data-testid="product" key={ product.id } className="items">
+                <img src={ product.thumbnail } alt={ product.title } />
+                <h3>{ product.title }</h3>
+                <h4>
+                  {product.price
                 && product.price.toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
                 })}
-              </h4>
-              <Link
-                key={ product.title }
-                data-testid="product-detail-link"
-                to={ `/productsDetails/${product.id}` }
-              >
-                <h4>Ver Detalhes</h4>
-              </Link>
-              <ButtonAddCart
-                data-testid="product-add-to-cart"
-                product={ product }
-              />
-            </section>
-          ))}
+                </h4>
+                <Link
+                  key={ product.title }
+                  data-testid="product-detail-link"
+                  to={ `/productsDetails/${product.id}` }
+                >
+                  <h4>Ver Detalhes</h4>
+                </Link>
+                <ButtonAddCart
+                  dataTestId="product-add-to-cart"
+                  product={ product }
+                />
+              </section>))}
       </div>
     );
   }

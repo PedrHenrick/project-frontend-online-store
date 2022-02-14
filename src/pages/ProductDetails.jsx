@@ -54,7 +54,7 @@ class ProductDetails extends React.Component {
             ))}
         </ul>
         <ButtonAddCart
-          data-testid="product-add-to-cart"
+          dataTestId="product-detail-add-to-cart"
           product={ products }
         />
         <ButtonCar />
