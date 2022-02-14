@@ -66,14 +66,14 @@ export default class Home extends React.Component {
       <div className="containerItems">
         {!valueSearch
           ? resulFail
-          : resultProducts.map((product) => {
-            if (product.quantity) {
-              product.quantity += 1;
-            } else {
-              product.quantity = 1;
-            }
+          : resultProducts.map((product) =>
+          // if (product.quantity) {
+          //   product.quantity += 1;
+          // } else {
+          //   product.quantity = 1;
+          // }
 
-            return (
+            (
               <section data-testid="product" key={ product.id } className="items">
                 <img src={ product.thumbnail } alt={ product.title } />
                 <h3>{ product.title }</h3>
@@ -95,8 +95,7 @@ export default class Home extends React.Component {
                   dataTestId="product-add-to-cart"
                   product={ product }
                 />
-              </section>);
-          })}
+              </section>))}
       </div>
     );
   }
