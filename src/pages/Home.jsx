@@ -15,7 +15,6 @@ export default class Home extends React.Component {
       resultProducts: [],
       searchInfo: false,
       valueSearch: false,
-      productInCart: [],
       contInCart: 0,
     };
   }
@@ -36,7 +35,6 @@ export default class Home extends React.Component {
   initialize = (QtdInCart) => {
     if (QtdInCart) {
       this.setState({
-        productInCart: [...QtdInCart],
         contInCart: QtdInCart.length,
       });
     }
@@ -58,18 +56,6 @@ export default class Home extends React.Component {
     this.setState({
       [name]: value,
     });
-  }
-
-  addCart = (product) => {
-    const prev = this.state;
-    const productInCart = [...prev.productInCart, product];
-
-    this.setState((prevState) => ({
-      productInCart,
-      contInCart: prevState.contInCart + 1,
-    }));
-
-    localStorage.setItem('cartItems', JSON.stringify(productInCart));
   }
 
   renderItens = () => {
@@ -100,7 +86,6 @@ export default class Home extends React.Component {
               <ButtonAddCart
                 data-testid="product-add-to-cart"
                 product={ product }
-                addCart={ this.addCart }
               />
             </section>
           ))}

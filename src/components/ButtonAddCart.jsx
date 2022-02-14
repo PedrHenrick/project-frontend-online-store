@@ -2,13 +2,33 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ButtonAddCart extends Component {
+  state = {
+    productInCart: [],
+  }
+
+  addCart = () => {
+    const { product } = this.props;
+    let { productInCart } = this.state;
+
+    const local = localStorage.getItem('cartItems');
+    const products = JSON.parse(local);
+
+    if (products === null) productInCart = [product];
+    else productInCart = [...products, product];
+
+    this.setState(() => ({
+      productInCart,
+    }));
+
+    localStorage.setItem('cartItems', JSON.stringify(productInCart));
+  }
+
   render() {
-    const { product, addCart } = this.props;
     return (
       <button
         type="button"
         data-testid="product-add-to-cart"
-        onClick={ () => addCart(product) }
+        onClick={ this.addCart }
       >
         Adicionar ao carrinho
       </button>
@@ -25,5 +45,4 @@ ButtonAddCart.propTypes = {
     PropTypes.array,
     PropTypes.object,
   ]).isRequired,
-  addCart: PropTypes.func.isRequired,
 };
