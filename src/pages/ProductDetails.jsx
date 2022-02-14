@@ -31,11 +31,13 @@ class ProductDetails extends React.Component {
         <h3>Detalhe do produto</h3>
         <p data-testid="product-detail-name">{title}</p>
         <img src={ thumbnail } alt={ title } />
-        <h3>
-          {' '}
-          { price }
-          {' '}
-        </h3>
+        <h4>
+          {price
+          && price.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
+        </h4>
         <ul>
           <h3>Especificações Técnicas</h3>
           {attributes

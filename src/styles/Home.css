@@ -41,8 +41,3 @@ img {
   min-height: 300px;
   min-width: 250px;
 }
-
-.items:hover {
-  box-shadow: 1px 1px 4px 4px #24da94;
-  padding: 5px;
-}

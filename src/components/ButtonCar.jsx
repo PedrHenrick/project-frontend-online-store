@@ -3,9 +3,9 @@ import { BsCart3 } from 'react-icons/bs';
 import { Redirect } from 'react-router-dom';
 
 class ButtonCar extends React.Component {
-  state={
+  state = {
     redirect: false,
-  }
+  };
 
   handleClick = () => {
     this.setState({ redirect: true });
@@ -17,13 +17,15 @@ class ButtonCar extends React.Component {
       return <Redirect to="/carrinho" />;
     }
     return (
-      <button
-        data-testid="shopping-cart-button"
-        type="submit"
-        onClick={ this.handleClick }
-      >
-        <BsCart3 size={ 20 } />
-      </button>
+      <div className="buttonCart">
+        <button
+          data-testid="shopping-cart-button"
+          type="submit"
+          onClick={ this.handleClick }
+        >
+          <BsCart3 size={ 20 } />
+        </button>
+      </div>
     );
   }
 }
