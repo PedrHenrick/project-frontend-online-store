@@ -1,0 +1,12 @@
+.buttonCart {
+  align-items: center;
+  display: inline-flex;
+}
+
+.contCart {
+  border: 0.5px solid black;
+  display: inline-block;
+  margin: 0;
+  margin-left: 3px;
+  padding: 1px 6px;
+}

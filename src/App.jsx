@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Carrinho from './pages/Carrinho';
-import './styles/Home.css';
 import ProductDetails from './pages/ProductDetails';
+import './styles/Home.css';
+import './styles/Button.css';
 
 class App extends React.Component {
   render() {
