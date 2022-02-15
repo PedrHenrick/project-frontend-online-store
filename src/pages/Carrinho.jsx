@@ -50,7 +50,6 @@ class Carrinho extends React.Component {
     let newProducts = [];
 
     if (product.quantity < 2) {
-      console.log(product);
       newProducts = products.filter((item) => item.id !== product.id);
     } else {
       newProducts = products.map((element) => {
@@ -66,15 +65,20 @@ class Carrinho extends React.Component {
   }
 
   render() {
-    // const { buttonClick } = this.props;
     const { redirect, products } = this.state;
     if (redirect) {
       return <Redirect to="/" />;
     }
-    console.log(products.length);
     return (
       <div className="carrinho">
-        {products.length > 0 ? (
+        { products === null || products.length === 0 ? (
+          <div className="msgCarrinhoVazio">
+            <h3 data-testid="shopping-cart-empty-message">
+              Seu carrinho está vazio.
+            </h3>
+            <ButtonBack buttonClick={ this.handleClick } />
+          </div>
+        ) : (
           <div>
             {products.map((product) => (
               <div key={ product.id }>
@@ -110,12 +114,6 @@ class Carrinho extends React.Component {
 
                 </button>
               </div>))}
-          </div>
-        ) : (
-          <div className="msgCarrinhoVazio">
-            <h3 data-testid="shopping-cart-empty-message">
-              Seu carrinho está vazio.
-            </h3>
             <ButtonBack buttonClick={ this.handleClick } />
           </div>
         )}
