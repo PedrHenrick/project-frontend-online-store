@@ -24,7 +24,6 @@ export default class Home extends React.Component {
 
     const QtdInStorage = localStorage.getItem('cartItems');
     const QtdInCart = JSON.parse(QtdInStorage);
-    console.log(QtdInCart);
 
     this.initialize(QtdInCart);
 
