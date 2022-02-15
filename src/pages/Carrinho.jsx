@@ -22,16 +22,29 @@ class Carrinho extends React.Component {
   increaseCartItem = (product) => {
     const { products } = this.state;
 
-    const findProduct = products.find((p) => p === product);
-    if (findProduct) {
-      findProduct.quantity += 1;
-    }
+    const newProducts = products.map((element) => {
+      if (element.id === product.id) {
+        return { ...element, quantity: element.quantity + 1 };
+      }
 
-    // this.setState((prevState)=> {
-    //   products: prevState.products
-    // });
-    // localStorage.setItem('cartItems');
-    console.log(findProduct);
+      return element;
+    });
+    this.setState({ products: newProducts });
+    localStorage.setItem('cartItems', JSON.stringify(newProducts));
+  }
+
+  decreaseCartItem = (product) => {
+    const { products } = this.state;
+
+    const newProducts = products.map((element) => {
+      if (element.id === product.id && element.quantity > 0) {
+        return { ...element, quantity: element.quantity - 1 };
+      }
+
+      return element;
+    });
+    this.setState({ products: newProducts });
+    localStorage.setItem('cartItems', JSON.stringify(newProducts));
   }
 
   render() {

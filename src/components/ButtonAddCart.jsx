@@ -16,7 +16,6 @@ class ButtonAddCart extends Component {
   addCart = () => {
     const { product } = this.props;
     let { productInCart } = this.state;
-    console.log(product, 'produto');
 
     const local = localStorage.getItem('cartItems');
     const products = JSON.parse(local);
