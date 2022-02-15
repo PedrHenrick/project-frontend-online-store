@@ -71,7 +71,7 @@ class Carrinho extends React.Component {
     }
     return (
       <div className="carrinho">
-        {products === null || products.length === 0 ? (
+        { products === null || products.length === 0 ? (
           <div className="msgCarrinhoVazio">
             <h3 data-testid="shopping-cart-empty-message">
               Seu carrinho está vazio.
