@@ -23,7 +23,7 @@ class ButtonAddCart extends Component {
     if (products === null) {
       productInCart = [{ ...product, quantity: 1 }];
     } else if (products.some((item) => item.id === product.id)) {
-      productInCart = productInCart.map((element) => {
+      productInCart = products.map((element) => {
         if (element.id === product.id) {
           return { ...element, quantity: element.quantity + 1 };
         }
